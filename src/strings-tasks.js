@@ -234,17 +234,17 @@ function endsWith(str, substr) {
 }
 
 /**
- * Returns a time string in the "mm:ss" format.
+ * Returns a time string in the 'mm:ss' format.
  *
  * @param {number} minutes - The number of minutes (non-negative integer).
  * @param {number} seconds - The number of seconds (non-negative integer).
- * @return {string} - The time string in the "mm:ss" format.
+ * @return {string} - The time string in the 'mm:ss' format.
  *
  * @example
- *   formatTime(5, 30) => "05:30"
- *   formatTime(1, 15) => "01:15"
- *   formatTime(0, 45) => "00:45"
- *   formatTime(0, 0) => "00:00"
+ *   formatTime(5, 30) => '05:30'
+ *   formatTime(1, 15) => '01:15'
+ *   formatTime(0, 45) => '00:45'
+ *   formatTime(0, 0) => '00:00'
  */
 function formatTime(minutes, seconds) {
   const str1 = minutes.toString().padStart(2, '0');
@@ -312,11 +312,11 @@ function containsSubstring(str, substring) {
  *   countVowels('XYZ') => 1
  */
 function countVowels(str) {
-  let count = -1;
-  const vowels = ["a", "e", "i", "o", "u", "y"];
-  for (let i = 0; i <= str.length; i += 1) {
-    for (let j = 0; j <= vowels.length; j += 1) {
-      if (str[i] === vowels[j]) {
+  let count = 0;
+  const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+  for (let i = 0; i <= str.length - 1; i += 1) {
+    for (let j = 0; j <= vowels.length - 1; j += 1) {
+      if (str[i].toLowerCase() === vowels[j]) {
         count += 1;
       }
     }
@@ -337,8 +337,15 @@ function countVowels(str) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const str3 = str.replaceAll(',', '').replaceAll(' ', '');
+  let str1 = '';
+  if (str3[str3.length - 1] === '!' || str3[str3.length - 1] === '?') {
+    str1 = str3.substring(0, str3.length - 1);
+    const str2 = str1.split('').reverse().join('');
+    return str2.toLowerCase() === str1.toLowerCase();
+  }
+  return str3.split('').reverse().join('').toLowerCase() === str3.toLowerCase();
 }
 
 /**
@@ -353,8 +360,15 @@ function isPalindrome(/* str */) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
+function findLongestWord(sentence) {
+  const arr = sentence.split(' ');
+  let longestItem = arr[0];
+  for (let i = 1; i < arr.length; i += 1) {
+    if (longestItem.length < arr[i].length) {
+      longestItem = arr[i];
+    }
+  }
+  return longestItem;
 }
 
 /**
@@ -367,8 +381,12 @@ function findLongestWord(/* sentence */) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  const arr = str.split(' ');
+  for (let i = 0; i < arr.length; i += 1) {
+    arr[i] = arr[i].split('').reverse().join('');
+  }
+  return arr.join(' ');
 }
 
 /**
@@ -382,8 +400,16 @@ function reverseWords(/* str */) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  const str1 = str.split('');
+  for (let i = 0; i < str1.length; i += 1) {
+    if (str1[i].toUpperCase() === str1[i]) {
+      str1[i] = str1[i].toLowerCase();
+    } else {
+      str1[i] = str1[i].toUpperCase();
+    }
+  }
+  return str1.join('');
 }
 
 /**
@@ -399,8 +425,8 @@ function invertCase(/* str */) {
  *   getStringFromTemplate('John','Doe') => 'Hello, John Doe!'
  *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -413,8 +439,9 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  const arr = value.split(' ');
+  return `${arr[1]} ${arr[2].replace('!', '')}`;
 }
 
 /**
@@ -428,8 +455,8 @@ function extractNameFromTemplate(/* value */) {
  *   unbracketTag('<span>') => 'span'
  *   unbracketTag('<a>') => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.replaceAll('<', '').replaceAll('>', '');
 }
 
 /**
@@ -447,8 +474,8 @@ function unbracketTag(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -467,8 +494,33 @@ function extractEmails(/* str */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  let result = '';
+  const str1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const str2 = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === str1[i]) {
+      result += str2[i];
+    }
+  }
+  return result;
+
+  function encodeToRot13(str) {
+    let result = [];
+    let res = '';
+   for (let i = 0; i < str.length; i += 1) {
+     if (str[i].toUpperCase() === str[i]) {
+       result.push(str[i].charCodeAt()-13);
+     }
+     else {
+       result.push(str[i].charCodeAt()+13);
+     }
+   }
+    for (let j = 0; j < result.length; j += 1) {
+      res += String.fromCharCode(result[j]);
+    }
+    return res;
+  }
 }
 
 /**
@@ -495,8 +547,68 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const arr = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+  let result = '';
+  for (let i = 0; i < arr.length; i += 1) {
+    if (value === arr[i]) {
+      result += i;
+    }
+  }
+  return result;
 }
 
 module.exports = {
