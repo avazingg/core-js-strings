@@ -496,31 +496,16 @@ function extractEmails(str) {
  */
 function encodeToRot13(str) {
   let result = '';
-  const str1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  const str2 = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  const str1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ?!.,';
+  const str2 = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm ?!.,';
   for (let i = 0; i < str.length; i += 1) {
-    if (str[i] === str1[i]) {
-      result += str2[i];
+    for (let j = 0; j < str1.length; j += 1) {
+      if (str[i] === str1[j]) {
+        result += str2[j];
+      }
     }
   }
   return result;
-
-  function encodeToRot13(str) {
-    let result = [];
-    let res = '';
-   for (let i = 0; i < str.length; i += 1) {
-     if (str[i].toUpperCase() === str[i]) {
-       result.push(str[i].charCodeAt()-13);
-     }
-     else {
-       result.push(str[i].charCodeAt()+13);
-     }
-   }
-    for (let j = 0; j < result.length; j += 1) {
-      res += String.fromCharCode(result[j]);
-    }
-    return res;
-  }
 }
 
 /**
